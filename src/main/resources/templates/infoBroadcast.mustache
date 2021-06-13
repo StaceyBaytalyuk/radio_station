@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Трансляція</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link href="styles/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+<form method="get" action="mainMenu">
+    <button type="submit">На головну</button>
+</form>
+<form method="get" action="broadcasts">
+    <button type="submit">Назад</button>
+</form>
+
+{{#message}}
+<div><span>{{message}}</span></div>
+{{/message}}
+
+{{#broadcast}}
+<div><span>id: {{id}}</span></div>
+{{/broadcast}}
+
+{{#durationAll}}
+<div><span>Тривалість (всього): {{durationAll}}</span></div>
+{{/durationAll}}
+
+{{#durationOccupied}}
+<div><span>Тривалість (занято): {{durationOccupied}}</span></div>
+{{/durationOccupied}}
+
+{{#durationAvailablePaid}}
+<div><span>Доступно для платного контенту: {{durationAvailablePaid}}</span></div>
+{{/durationAvailablePaid}}
+
+{{#profit}}
+<div><span>Дохід: {{profit}} євро</span></div>
+{{/profit}}
+
+<b>Ведучі</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Стаж роботи</th>
+    </tr>
+    {{#employedPresenters}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{experience}} років</td>
+    </tr>
+    {{/employedPresenters}}
+</table>
+
+<b>Запрошені ведучі</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Резюме</th>
+    </tr>
+    {{#invitedPresenters}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{resume}}</td>
+    </tr>
+    {{/invitedPresenters}}
+</table>
+
+<b>Порядок частин трансляції</b>
+<table>
+    <tr>
+        <th>№</th>
+        <th>ID</th>
+    </tr>
+    {{#partsOfBroadcast}}
+        <tr>
+            <td>{{number}}</td>
+            <td>{{part.id}}</td>
+        </tr>
+    {{/partsOfBroadcast}}
+</table>
+
+<b>Пісні</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Виконавець</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#songs}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{artist}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/songs}}
+</table>
+
+<b>Реклама</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Продукт</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#advertisements}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{product}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/advertisements}}
+</table>
+
+<b>Інтерв'ю</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Інтерв'юємий</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#interviews}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{interviewee}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/interviews}}
+</table>
+</body>
+</html>

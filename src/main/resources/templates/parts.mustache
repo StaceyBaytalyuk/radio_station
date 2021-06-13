@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Частини трансляції</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link href="styles/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+<form method="get" action="mainMenu">
+    <button type="submit">На головну</button>
+</form>
+
+{{#message}}
+<div><span>{{message}}</span></div>
+{{/message}}
+
+<div>
+    <form method="post" action="addUnpaidPartToBroadcast">
+        <button type="submit">Додати безкоштовну частину до трансляції</button>
+        <input type="number" name="id_part" placeholder="id частини"/>
+        <input type="number" name="id_broadcast" placeholder="id трансляції"/>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="addPaidPartToBroadcast">
+        <button type="submit">Додати платну частину до трансляції</button>
+        <input type="number" name="id_part" placeholder="id частини"/>
+        <input type="number" name="id_broadcast" placeholder="id трансляції"/>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="addSong">
+        <button type="submit">Додати пісню</button>
+        <input type="text" name="name" placeholder="Назва"/>
+        <input type="text" name="artist" placeholder="Виконавець"/>
+        <input type="number" name="duration" placeholder="секунд"/>
+    </form>
+</div>
+<b>Пісні</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Виконавець</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#songs}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{artist}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/songs}}
+</table>
+
+<div>
+    <form method="post" action="addAdvertisement">
+        <button type="submit">Додати рекламу</button>
+        <input type="text" name="name" placeholder="Продукт"/>
+        <input type="number" name="duration" placeholder="секунд"/>
+    </form>
+</div>
+<b>Реклама</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Продукт</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#advertisements}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{product}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/advertisements}}
+</table>
+
+<div>
+    <form method="post" action="addInterview">
+        <button type="submit">Додати інтерв'ю</button>
+        <input type="text" name="name" placeholder="Інтерв'юємий"/>
+        <input type="number" name="duration" placeholder="секунд"/>
+    </form>
+</div>
+<b>Інтерв'ю</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Інтерв'юємий</th>
+        <th>Тривалість</th>
+    </tr>
+    {{#interviews}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{interviewee}}</td>
+        <td>{{duration}} сек.</td>
+    </tr>
+    {{/interviews}}
+</table>
+</body>
+</html>

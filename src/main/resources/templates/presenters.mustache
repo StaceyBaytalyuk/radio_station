@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Ведучі</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link href="styles/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+<form method="get" action="mainMenu">
+    <button type="submit">На головну</button>
+</form>
+
+{{#message}}
+<div><span>{{message}}</span></div>
+{{/message}}
+
+<div>
+    <form method="post" action="addPresenterToBroadcast">
+        <button type="submit">Додати ведучого до трансляції</button>
+        <input type="number" name="id_broadcast" placeholder="id трансляції"/>
+        <input type="number" name="id_presenter" placeholder="id ведучого"/>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="addEmployedPresenter">
+        <button type="submit">Додати ведучого</button>
+        <input type="text" name="name" placeholder="Ім'я"/>
+        <input type="number" name="experience" placeholder="Стаж"/>
+    </form>
+</div>
+
+<b>Employed presenters</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Стаж роботи</th>
+    </tr>
+    {{#employedPresenters}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{experience}} років</td>
+        </tr>
+    {{/employedPresenters}}
+</table>
+
+<div>
+    <form method="post" action="addInvitedPresenter">
+        <button type="submit">Додати запрошеного ведучого</button>
+        <input type="text" name="name" placeholder="Ім'я"/>
+        <input type="text" name="resume" placeholder="Резюме"/>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="invitePresenterToBroadcast">
+        <button type="submit">Запросити ведучого до трансляції</button>
+        <input type="number" name="id_broadcast" placeholder="id трансляції"/>
+        <input type="number" name="id_presenter" placeholder="id ведучого"/>
+    </form>
+</div>
+
+<b>Invited presenters</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Резюме</th>
+    </tr>
+    {{#invitedPresenters}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{resume}}</td>
+    </tr>
+    {{/invitedPresenters}}
+</table>
+</body>
+</html>

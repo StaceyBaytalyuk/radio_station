@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Трансляції</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link href="styles/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+<form method="get" action="mainMenu">
+    <button type="submit">На головну</button>
+</form>
+
+{{#message}}
+<div><span>{{message}}</span></div>
+{{/message}}
+
+<div>
+    <form method="post" action="addBroadcast">
+        <button type="submit">Додати трансляцію</button>
+        <input type="number" name="duration" placeholder="секунд"/>
+    </form>
+</div>
+
+<b>Трансляції</b>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Тривалість</th>
+        <th>Деталі</th>
+    </tr>
+    {{#broadcasts}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{duration}} сек.</td>
+            <td>
+                <form method="get" action="infoBroadcast">
+                    <button type="submit">info</button>
+                    <input type='hidden' name='id' value={{id}} />
+                </form>
+            </td>
+        </tr>
+    {{/broadcasts}}
+</table>
+</body>
+</html>
