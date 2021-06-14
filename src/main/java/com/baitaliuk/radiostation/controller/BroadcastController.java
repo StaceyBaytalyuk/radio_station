@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Map;
@@ -52,9 +53,10 @@ public class BroadcastController {
     }
 
     @PostMapping("addBroadcast")
-    public String addBroadcast(@RequestParam Integer duration, Map<String, Object> model) {
-        if ( duration!=null ) {
-            broadcastRepo.save(new Broadcast(duration));
+    public String addBroadcast(@RequestParam String duration, /*@RequestParam Integer duration,*/ Map<String, Object> model) {
+        if ( !duration.isEmpty() ) {
+            int seconds = parseTimeHourMinSec(duration);
+            broadcastRepo.save(new Broadcast(seconds));
         } else {
             model.put("message", "Неможливо додати трансляцію, введіть тривалість");
         }
@@ -145,6 +147,14 @@ public class BroadcastController {
         int sum = 0;
         sum += allPartsOfBroadcast.stream().mapToInt(Part::getDuration).sum();
         return sum;
+    }
+
+    private int parseTimeHourMinSec(String duration) {
+        String[] minSec = duration.split(":");
+        int hours = new Integer(minSec[0]); int minutes = new Integer(minSec[1]); int seconds = new Integer(minSec[2]);
+        seconds += minutes*60;
+        seconds += hours*3600;
+        return seconds;
     }
 
     private StringBuilder stringFormatTime(int seconds) {

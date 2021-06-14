@@ -49,9 +49,9 @@ public class PartsController {
     }
 
     @PostMapping("addSong")
-    public String addSong(@RequestParam Integer duration, @RequestParam String name, @RequestParam String artist, Map<String, Object> model) {
-        if ( !name.isEmpty() && !artist.isEmpty() && duration!=null ) {
-            Song song = new Song(duration, name, artist);
+    public String addSong(@RequestParam String duration, @RequestParam String name, @RequestParam String artist, Map<String, Object> model) {
+        if ( !name.isEmpty() && !artist.isEmpty() && !duration.isEmpty() ) {
+            Song song = new Song(parseTimeMinSec(duration), name, artist);
             songRepo.save(song);
         } else {
             model.put("message", "Введіть усі поля");
@@ -60,9 +60,9 @@ public class PartsController {
     }
 
     @PostMapping("addAdvertisement")
-    public String addAdvertisement(@RequestParam Integer duration, @RequestParam String product, Map<String, Object> model) {
-        if ( !product.isEmpty() ) {
-            Advertisement advertisement = new Advertisement(duration, product);
+    public String addAdvertisement(@RequestParam String duration, @RequestParam String product, Map<String, Object> model) {
+        if ( !product.isEmpty() && !duration.isEmpty() ) {
+            Advertisement advertisement = new Advertisement(parseTimeMinSec(duration), product);
             advertisementRepo.save(advertisement);
         } else {
             model.put("message", "Введіть усі поля");
@@ -71,9 +71,9 @@ public class PartsController {
     }
 
     @PostMapping("addInterview")
-    public String addInterview(@RequestParam Integer duration, @RequestParam String interviewee, Map<String, Object> model) {
-        if ( !interviewee.isEmpty() ) {
-            Interview interview = new Interview(duration, interviewee);
+    public String addInterview(@RequestParam String duration, @RequestParam String interviewee, Map<String, Object> model) {
+        if ( !interviewee.isEmpty() && !duration.isEmpty() ) {
+            Interview interview = new Interview(parseTimeMinSec(duration), interviewee);
             interviewRepo.save(interview);
         } else {
             model.put("message", "Введіть усі поля");
@@ -148,6 +148,13 @@ public class PartsController {
         int available = broadcast.getDuration() / 2;
         int occupied = sum + partToAdd.getDuration();
         return available >= occupied;
+    }
+
+    private int parseTimeMinSec(String duration) {
+        String[] minSec = duration.split(":");
+        int minutes = new Integer(minSec[0]); int seconds = new Integer(minSec[1]);
+        seconds += minutes*60;
+        return seconds;
     }
 
 }
